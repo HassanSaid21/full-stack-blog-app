@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Homepge from "./routes/Homepge.jsx";
+import Homepage from "./routes/Homepage.jsx";
 import Write from "./routes/Write.jsx";
 import Login from "./routes/Login.jsx";
 import Register from "./routes/Register.jsx";
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Homepge />,
+        element: <Homepage />,
       },
       {
         path: "/write",
