@@ -2,7 +2,7 @@
 function Homepge() {
   return (
     <div>
-      
+      home
     </div>
   )
 }

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Image from "./Image";
+import { Link } from "react-router-dom";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -9,10 +11,10 @@ function Navbar() {
   return (
     <div className="flex w-full h-16 md:h-20  items-center justify-between">
       {/* Logo */}
-      <div className="flex gap-4 text-2xl font-bold">
+      <Link to="/" className="flex gap-4 text-2xl font-bold">
         <Image src="logo.png" alt="the blog-logo" w={32} h={32} />
         <span>Protoblog</span>
-      </div>
+      </Link>
 
       {/* Mobile Menu */}
       <div className="md:hidden">
@@ -25,28 +27,33 @@ function Navbar() {
             open ? "-right-0" : "-right-[100%]"
           } flex flex-col items-center justify-center absolute top-16 transition-all text-lg ease-in-out gap-8`}
         >
-          <a href="">Home</a>
-          <a href="">Trending</a>
-          <a href="">Most Popular</a>
-          <a href="">About</a>
-          <a href="">
+          <Link to="/">Home</Link>
+          <Link to="/">Trending</Link>
+          <Link to="/">Most Popular</Link>
+          <Link to="/">About</Link>
+          <Link to="/">
             <button className="py-2 px-4 bg-blue-900 rounded-2xl text-white">
               👋 login
             </button>
-          </a>
+          </Link>
         </div>
       </div>
       {/* Desktop Menu */}
       <div className="hidden md:flex items-center gap-8  xl:gap-12 font-medium ">
-        <a href="">Home</a>
-        <a href="">Trending</a>
-        <a href="">Most Popular</a>
-        <a href="">About</a>
-        <a href="">
-          <button className="py-2 px-4 bg-blue-900 rounded-2xl text-white">
-            👋 login
-          </button>
-        </a>
+        <Link to="/">Home</Link>
+        <Link to="/posts">Trending</Link>
+        <Link to="/">Most Popular</Link>
+        <Link to="/">About</Link>
+        <SignedOut>
+          <Link to="/login">
+            <button className="py-2 px-4 bg-blue-900 rounded-2xl text-white">
+              👋 login
+            </button>
+          </Link>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </div>
     </div>
   );

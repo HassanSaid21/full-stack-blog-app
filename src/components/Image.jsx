@@ -8,7 +8,7 @@ function Image({src , className , h  , w  , alt}) {
     width={w}
     path={src}
     alt={alt}
-    loading= 'lazy'
+    loading= "lazy"
     lqip ={{active:true , quality:20}}
      />
   )
