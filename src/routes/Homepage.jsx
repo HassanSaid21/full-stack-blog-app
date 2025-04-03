@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import MainCategories from "../components/MainCategories";
+import FeaturedPosts from "../components/FeaturedPosts";
+import PostList from "../components/PostList";
 
 function Homepage() {
   return (
@@ -12,17 +15,17 @@ function Homepage() {
       {/* introduction */}
       <div className="flex justify-between items-center">
         {/* Titles */}
-        <div >
+        <div>
           <h1 className="text-gray-800 font-bold text-2xl md:5xl lg:text-6xl">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </h1>
           <p className="mt-8 text-md md:text-xl">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam
             nostrum esse harum corporis.
-          </p> 
-           </div>
-          {/* Animated Button */}
-          <Link to='/write' className="relative hidden md:block">
+          </p>
+        </div>
+        {/* Animated Button */}
+        <Link to="/write" className="relative hidden md:block">
           <svg
             viewBox="0 0 200 200"
             width="200"
@@ -58,12 +61,16 @@ function Homepage() {
               <polyline points="9 6 18 6 18 15" />
             </svg>
           </button>
-          </Link>
-        
-      
+        </Link>
       </div>
+
+      {/* Categories */}
+  <MainCategories />
       {/* Featured posts */}
+      <FeaturedPosts />
       {/* Posts list */}
+
+      <PostList />
     </div>
   );
 }

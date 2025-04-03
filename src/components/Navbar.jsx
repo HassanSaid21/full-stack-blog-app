@@ -19,13 +19,13 @@ function Navbar() {
       {/* Mobile Menu */}
       <div className="md:hidden">
         {/*Mobile button  */}
-        <button onClick={handleOpen} className=" text-3xl text-gray-800">
+        <button onClick={handleOpen} className=" text-3xl text-gray-800 ">
           {open ? "X" : "☰"}
         </button>
         <div
           className={`h-screen w-full ${
             open ? "-right-0" : "-right-[100%]"
-          } flex flex-col items-center justify-center absolute top-16 transition-all text-lg ease-in-out gap-8`}
+          } bg-[#e6e6ff] flex flex-col items-center justify-center absolute top-16 transition-all text-lg ease-in-out gap-8`}
         >
           <Link to="/">Home</Link>
           <Link to="/">Trending</Link>

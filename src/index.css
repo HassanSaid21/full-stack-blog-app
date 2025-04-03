@@ -2,11 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+
+*{
+  box-sizing: border-box;
+}
 body {
   background-color: #e6e6ff;
   width: 100vw;
   overflow-x: hidden;
   font-family: "Montserrat" sans-serif;
+
 }
 
 .animatedButton {
