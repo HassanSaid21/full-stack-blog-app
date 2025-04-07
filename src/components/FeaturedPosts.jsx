@@ -5,6 +5,7 @@ function FeaturedPosts() {
   return (
     <div className="flex my-8 flex-col lg:flex-row gap-8 ">
       {/* first */}
+      
       <div className="w-full lg:w-1/2 flex flex-col gap-4">
         {/* image */}
         <Image

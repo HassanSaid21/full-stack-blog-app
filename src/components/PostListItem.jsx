@@ -5,7 +5,11 @@ function PostListItem() {
   return (
     <div className="flex flex-col xl:flex-row gap-8">
       <div className="md:hidden xl:block">
-        <Image src="postImg.jpeg" className="rounded-2xl object-cover" w={753} />
+        <Image
+          src="postImg.jpeg"
+          className="rounded-2xl object-cover"
+          w={753}
+        />
       </div>
       {/* details */}
       <div className="flex flex-col gap-4">
@@ -25,7 +29,9 @@ function PostListItem() {
           eligendi sit sunt earum maxime deserunt, doloribus consequatur
           expedita, dolorem ex .
         </p>
-        <Link to='/test' className="underline text-blue-800 text-sm">Read more</Link>
+        <Link to="/test" className="underline text-blue-800 text-sm">
+          Read more
+        </Link>
       </div>
     </div>
   );
