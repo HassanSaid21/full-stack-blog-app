@@ -69,7 +69,7 @@ function Homepage() {
       {/* Featured posts */}
       <FeaturedPosts />
       {/* Posts list */}
-
+      <h1 className="text-gray-400 text-2xl mt-4">Recent Posts</h1>
       <PostList />
     </div>
   );
