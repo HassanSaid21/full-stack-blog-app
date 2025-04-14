@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import 'react-quill-new/dist/quill.snow.css';
+import "react-quill-new/dist/quill.snow.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Homepage from "./routes/Homepage.jsx";
 import Write from "./routes/Write.jsx";
@@ -11,14 +11,10 @@ import PostsList from "./routes/PostsList.jsx";
 import SinglePost from "./routes/SinglePost.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
 import { ClerkProvider } from "@clerk/clerk-react";
-import {
-  QueryClient,
-  QueryClientProvider,
-  
-} from '@tanstack/react-query'
-
-const queryClient = new QueryClient()
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import{ ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+const queryClient = new QueryClient();
 
 // Import your Publishable Key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -61,8 +57,10 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router}></RouterProvider></QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router}/>
+        <ToastContainer position='bottom-right' />
+      </QueryClientProvider>
     </ClerkProvider>
   </StrictMode>
 );

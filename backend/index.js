@@ -4,19 +4,17 @@ import commentRouter from "./routes/comment.route.js";
 import postRouter from "./routes/post.route.js";
 import WebhookRouter from "./routes/webHook.route.js";
 import connectDB from "./lib/connectDB.js";
-
+import cors from 'cors'
 import { clerkMiddleware } from "@clerk/express";
 const app = express();
+app.use(cors(process.env.CLIENT_URL))
 app.use(clerkMiddleware());
 app.use("/webhooks", WebhookRouter);
 
 // Parse JSON payloads
 app.use(express.json());
 
-app.post("/protected", (req, res) => {
-  const { userID } = req.Auth;
-  if (!userID) return res.json("not authenticated");
-});
+
 // Routes
 app.use("/users", userRouter);
 app.use("/posts", postRouter);

@@ -20,9 +20,20 @@ export async function createPost(req, res) {
 
   const user = await userModel.findOne({ clerkUserId });
 
-  const newPost = new postModel({ ...req.body, user: user._id });
+  let slug = req.body.title.replace(/ /g, "-").toLowerCase().trimEnd();
+  let existingPost = await postModel.findOne({ slug });
+  let counter = 2;
+
+  while (existingPost) {
+    slug = `${slug}-${counter}` ;
+    existingPost =await postModel.findOne({ slug });
+   counter++;
+  }
+
+  const newPost = new postModel({ ...req.body, user: user._id, slug });
   const post = await newPost.save();
-  res.status(200).json("post has been created");
+  res.status(200).json(post); // this includes the slug
+
 }
 
 export async function deletePost(req, res) {

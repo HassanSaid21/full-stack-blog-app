@@ -10,6 +10,10 @@ const postSchema = new Schema(
     desc: {
       type: String,
     },
+    category: {
+      type: String,
+      default :'general'
+    },
     img: {
       type: String,
     },
