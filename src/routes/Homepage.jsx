@@ -4,6 +4,7 @@ import FeaturedPosts from "../components/FeaturedPosts";
 import PostList from "../components/PostList";
 
 function Homepage() {
+  
   return (
     <div className="flex flex-col gap-4">
       {/* breadcrumb */}
