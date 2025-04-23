@@ -1,18 +1,18 @@
-
-import { IKImage } from 'imagekitio-react';
-function Image({src , className , h  , w  , alt}) {
+import { IKImage } from "imagekitio-react";
+function Image({ src, className, h, w, alt }) {
   return (
-    <IKImage urlEndpoint = {import.meta.env.VITE_IK_URL_ENDPOINT}
-    className={className}
-    height= {h}
-    width={w}
-    path={src}
-    alt={alt}
-    loading= "lazy"
-    lqip ={{active:true , quality:20}}
-    transformation={[{width:w , height :h}]}
-     />
-  )
+    <IKImage
+      
+      className={className}
+      height={h}
+      width={w}
+      path={src}
+      alt={alt}
+      loading="lazy"
+      lqip={{ active: true, quality: 20 }}
+      transformation={[{ width: w, height: h }]}
+    />
+  );  
 }
 
-export default Image
+export default Image;

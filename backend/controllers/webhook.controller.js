@@ -19,12 +19,11 @@ export async function clerkWebHook(req, res) {
     return res.status(400).json({ message: "Webhook verification failed" });
   }
 
-  
-
   if (evt.type === "user.created") {
     try {
       const newUser = new userModel({
-        username: evt.data.username || evt.data.email_addresses?.[0]?.email_address,
+        username:
+          evt.data.username || evt.data.email_addresses?.[0]?.email_address,
         clerkUserId: evt.data.id,
         email: evt.data.email_addresses?.[0]?.email_address,
         img: evt.data.profile_img_url,
@@ -39,7 +38,9 @@ export async function clerkWebHook(req, res) {
 
   if (evt.type === "user.deleted") {
     try {
-      const deletedUser =  await userModel.findOneAndDelete({clerkUserId:evt.data.id});
+      const deletedUser = await userModel.findOneAndDelete({
+        clerkUserId: evt.data.id,
+      });
       console.log("🗑️ User deleted");
     } catch (error) {
       console.error("❌ Error deleting user:", error.message);

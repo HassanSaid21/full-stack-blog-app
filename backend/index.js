@@ -2,11 +2,19 @@ import express from "express";
 import userRouter from "./routes/user.route.js";
 import commentRouter from "./routes/comment.route.js";
 import postRouter from "./routes/post.route.js";
-import WebhookRouter from "./routes/webHook.route.js";
+import WebhookRouter from "./routes/webhook.route.js";
 import connectDB from "./lib/connectDB.js";
 import cors from 'cors'
 import { clerkMiddleware } from "@clerk/express";
 const app = express();
+
+// allow cross-origin requests for imageKit
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", 
+    "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(cors(process.env.CLIENT_URL))
 app.use(clerkMiddleware());
 app.use("/webhooks", WebhookRouter);
@@ -39,3 +47,5 @@ app.listen(3000, async () => {
     process.exit(1); // Stop server if DB fails
   }
 });
+
+

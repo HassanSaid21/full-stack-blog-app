@@ -4,15 +4,19 @@ import {
   deletePost,
   getPost,
   getPosts,
+  uploadAuth
 } from "../controllers/post.controller.js";
 
 const router = express.Router();
 
-router.get("/", getPosts);
-router.get("/:slug", getPost);
+// Static or specific routes first
+router.get('/upload-auth', uploadAuth);
+router.get('/', getPosts);
+router.post('/', createPost);
 
-router.post("/" , createPost);
+// Dynamic routes after static ones
+router.get('/:slug', getPost);
+router.delete('/:id', deletePost);
 
-router.delete("/:id", deletePost);
+export default router
 
-export default router;

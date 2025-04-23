@@ -6,11 +6,9 @@ function MainLayout() {
     <div className='px-6 md:px-8 lg:px-16 xl:px-32 2xl:px-64'>
           {/* Navbar */}
           <Navbar />
+          {/* child Component */}
           <Outlet />
-          {/* breadcrumb */}
-          {/* introduction */}
-          {/* Featured posts */}
-          {/* Posts list */}
+        
         
           </div>
   )

@@ -1,6 +1,15 @@
 import postModel from "../models/post.model.js";
 
 import userModel from "../models/user.model.js";
+
+import ImageKit from 'imagekit';
+
+const imagekit = new ImageKit({
+  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
+  publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+  privateKey: process.env.IMAGEKIT_PRIVATE_KEY
+})
+
 export async function getPosts(req, res) {
   const posts = await postModel.find();
   res.status(200).send(posts);
@@ -9,10 +18,14 @@ export async function getPosts(req, res) {
 
 export async function getPost(req, res) {
   const post = await postModel.findOne({ slug: req.params.slug });
-
   res.status(200).json(post);
 }
 
+
+export async function uploadAuth(req, res) {
+  var result = imagekit.getAuthenticationParameters();
+  res.send(result);
+}
 export async function createPost(req, res) {
   const clerkUserId = req.auth.userId;
   if (!clerkUserId)

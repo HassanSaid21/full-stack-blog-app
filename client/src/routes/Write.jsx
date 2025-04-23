@@ -1,14 +1,28 @@
 import { SignIn, useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactQuill from "react-quill-new";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Upload from "../components/Upload";
+
 function Write() {
   const { getToken } = useAuth();
   const navigate = useNavigate();
   const [value, setValue] = useState("");
+  const [cover, setCover] = useState("");
+  const [progress, setProgress] = useState(0);
+  const [img, setImg] = useState();
+  const [video, setVideo] = useState();
+
+  useEffect(() => {
+    
+    if(img) setValue(prev=>prev+`<P><img src="${img.url}"/></P>`)
+    if(video) setValue(prev=> prev+ `<p><iframe class='ql-video' src="${video.url}"></iframe></p>`) 
+    
+  }, [img , video]);
+
   const mutation = useMutation({
     mutationFn: async (newPost) => {
       const token = await getToken();
@@ -18,23 +32,25 @@ function Write() {
         },
       });
     },
-    onSuccess :(res)=>{ 
-      toast.success('post has been created successfully')
-      navigate(`/${res.data.slug}`)
-  },
-  onError:(err)=> toast.error(err?.response?.data?.message || "Something went wrong")
-
+    onSuccess: (res) => {
+      toast.success("post has been created successfully");
+      navigate(`/${res.data.slug}`);
+    },
+    onError: (err) =>
+      toast.error(err?.response?.data?.message || "Something went wrong"),
   });
+
   function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = {
+      img:cover.filePath||'' ,
       content: value,
       title: formData.get("title"),
       desc: formData.get("desc"),
       category: formData.get("category"),
+      // cover,
     };
-    
     mutation.mutate(data);
   }
 
@@ -50,7 +66,7 @@ function Write() {
     );
 
   return (
-    <div className="h-[calc(100vh -v64px)] md:h-[calc(100vh-80px)] flex flex-col gap-6">
+    <div className="h-[calc(100vh -64px)] md:h-[calc(100vh-80px)] flex flex-col gap-6">
       <h1 className="text-xl text-blue-900 font-semibold">
         <i>Create a new post</i>{" "}
       </h1>
@@ -59,9 +75,24 @@ function Write() {
         className="flex flex-col gap-6 flex-1 mb-6"
         onSubmit={handleSubmit}
       >
-        <button className="rounded-xl bg-white w-max p-2 text-gray-500 text-sm shadow-md">
-          Add a cover Image{" "}
-        </button>
+        <Upload
+          type="image"
+          setProgress={setProgress}
+          setData={setCover}
+          file="test-one"
+        >
+          <button
+            type="button"
+            className="rounded-xl z-20 bg-white  p-2 text-gray-500 text-sm shadow-md"
+          >
+            Add a cover Image
+          </button>
+        </Upload>
+
+        {/* <div className="">
+          <Image className='w-32 h-32 object-cover rounded-xl' w={32} h={32} alt='cover Image' src={'test.png'} />
+        </div> */}
+
         <input
           type="text"
           placeholder="My Awesome Story"
@@ -70,7 +101,7 @@ function Write() {
         />
         <div className="gap-2 flex items-center ">
           <label htmlFor="categories" className="text-sm ">
-            Choose a category :
+            Choose a category:
           </label>
           <select
             name="category"
@@ -90,18 +121,27 @@ function Write() {
           name="desc"
           placeholder="A Short Description "
         ></textarea>
-        <ReactQuill
-          theme="snow"
-          className="flex-1 rounded-xl bg-white shadow-md"
-          value={value}
-          onChange={setValue}
-        />
+        <div className="flex flex-1 gap-2 ">
+          <div className="flex flex-col gap-2">
+            <Upload setProgress={setProgress} setData={setImg}  type='image' >🖼 </Upload>
+            <Upload setProgress={setProgress} setData={setVideo} type='video'>▶</Upload>
+          </div>
+          <ReactQuill
+            theme="snow"
+            className="flex-1 rounded-xl bg-white shadow-md "
+            value={value}
+            onChange={setValue}
+            readOnly={progress > 0 && progress < 100}
+          />
+        </div>
         <button
-          disabled={mutation.isPending}
+          disabled={mutation.isPending || (progress > 0 && progress < 100)}
+          type="submit"
           className="rounded-xl bg-blue-800 text-white p-2   w-36 shadow-md font-medium disabled:bg-blue-300 disabled:cursor-not-allowed"
         >
           {mutation.isPending ? "loading..." : "send"}
         </button>
+        {progress === 0 ? null : progress}
         {mutation.isError && <span>{mutation.error.message} </span>}
       </form>
     </div>
