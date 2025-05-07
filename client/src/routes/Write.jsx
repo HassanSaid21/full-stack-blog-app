@@ -6,6 +6,7 @@ import ReactQuill from "react-quill-new";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Upload from "../components/Upload";
+import Image from "../components/Image";
 
 function Write() {
   const { getToken } = useAuth();
@@ -15,7 +16,7 @@ function Write() {
   const [progress, setProgress] = useState(0);
   const [img, setImg] = useState();
   const [video, setVideo] = useState();
-
+  console.log(cover)
   useEffect(() => {
     
     if(img) setValue(prev=>prev+`<P><img src="${img.url}"/></P>`)
@@ -33,8 +34,8 @@ function Write() {
       });
     },
     onSuccess: (res) => {
-      toast.success("post has been created successfully");
-      navigate(`/${res.data.slug}`);
+       toast.success("post has been created successfully");
+       navigate(`/${res.data.slug}`);
     },
     onError: (err) =>
       toast.error(err?.response?.data?.message || "Something went wrong"),
@@ -68,31 +69,31 @@ function Write() {
   return (
     <div className="h-[calc(100vh -64px)] md:h-[calc(100vh-80px)] flex flex-col gap-6">
       <h1 className="text-xl text-blue-900 font-semibold">
-        <i>Create a new post</i>{" "}
+        <i>Create a new post</i>
       </h1>
       <form
-        action=""
         className="flex flex-col gap-6 flex-1 mb-6"
         onSubmit={handleSubmit}
       >
+        <div className=" flex sm:flex-row flex-col gap-8">
         <Upload
           type="image"
           setProgress={setProgress}
           setData={setCover}
-          file="test-one"
+          file={`cover-${Date.now()}`} // ✅ generate unique name
         >
           <button
             type="button"
             className="rounded-xl z-20 bg-white  p-2 text-gray-500 text-sm shadow-md"
           >
             Add a cover Image
-          </button>
+          </button> 
+        
         </Upload>
-
-        {/* <div className="">
-          <Image className='w-32 h-32 object-cover rounded-xl' w={32} h={32} alt='cover Image' src={'test.png'} />
-        </div> */}
-
+   {progress === 0 ? null : (progress <100?progress:'✅')}
+      
+        {cover&&  <Image className='w-32 h-32 object-cover rounded-xl' w={32} h={32} alt='cover Image' src={`${cover.filePath}?v=${Date.now()}`} />
+      }  </div>
         <input
           type="text"
           placeholder="My Awesome Story"
@@ -128,7 +129,7 @@ function Write() {
           </div>
           <ReactQuill
             theme="snow"
-            className="flex-1 rounded-xl bg-white shadow-md "
+            className="flex-1 rounded-xl bg-white shadow-md min-h-44"
             value={value}
             onChange={setValue}
             readOnly={progress > 0 && progress < 100}
@@ -141,7 +142,7 @@ function Write() {
         >
           {mutation.isPending ? "loading..." : "send"}
         </button>
-        {progress === 0 ? null : progress}
+        
         {mutation.isError && <span>{mutation.error.message} </span>}
       </form>
     </div>

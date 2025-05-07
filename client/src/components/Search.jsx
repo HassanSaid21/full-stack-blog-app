@@ -1,6 +1,22 @@
-  function Search() {
-    return (
-      <div className="bg-gray-100 p-2 rounded-full flex items-center gap-2">
+
+import {  useLocation, useNavigate, useSearchParams } from "react-router-dom";
+
+function Search() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [searchParams , setSearchParams] = useSearchParams()
+  function handleSubmit(e) {
+  if (e.key==='Enter'){
+     const search =  e.target.value
+ location.pathname.includes("/posts") ? setSearchParams({...Object.fromEntries(searchParams) , search}) : 
+    navigate(`/posts?search=${search}`);
+   console.log('done')
+  }}
+  return (
+    <div
+      
+      className="bg-gray-100 p-2 rounded-full flex items-center gap-2"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -13,14 +29,14 @@
         <line x1="16.5" y1="16.5" x2="22" y2="22" />
       </svg>
       <input
+      onKeyDown={handleSubmit}
         type="text"
         placeholder="search a post..."
         className="bg-transparent outline-none"
         // onKeyDown={handleKeyPress}
       />
     </div>
-    )
-  }
-  
-  export default Search
-  
+  );
+}
+
+export default Search;

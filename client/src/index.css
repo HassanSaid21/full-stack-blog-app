@@ -27,3 +27,37 @@ body {
 }.ql-editor {
   border: none !important;
 }
+
+.content {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* .ql-code-block-container {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: monospace;
+  white-space: pre-wrap;
+  color: rgb(47, 17, 184);
+}
+
+.ql-code-block {
+  margin: 0;
+  line-height: 1.5;
+} */
+
+ iframe.ql-video {
+  width: 100%; /* Full width of the container */
+  height: 400px; /* Fixed height */
+  border: none; /* Remove borders */
+  margin-top: 20px; /* Add spacing above the video */
+}
+
+@media (max-width: 768px) {
+   iframe.ql-video {
+    height: 250px; /* Adjust height for smaller screens */
+  }
+}
+
+

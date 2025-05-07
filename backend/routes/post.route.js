@@ -4,7 +4,8 @@ import {
   deletePost,
   getPost,
   getPosts,
-  uploadAuth
+  uploadAuth,
+  featurePost
 } from "../controllers/post.controller.js";
 
 const router = express.Router();
@@ -17,6 +18,7 @@ router.post('/', createPost);
 // Dynamic routes after static ones
 router.get('/:slug', getPost);
 router.delete('/:id', deletePost);
+router.patch('/feature', featurePost )
 
 export default router
 

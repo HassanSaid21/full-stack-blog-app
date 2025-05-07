@@ -1,7 +1,12 @@
 import express from "express";
-import { getUsers } from "../controllers/user.controller.js";
+import { getUsers, getUserSavedPosts, savePost } from "../controllers/user.controller.js";
 const router = express.Router();
 
 router.get("/", getUsers);
 
-export default router;
+router.get('/saved-posts', getUserSavedPosts )
+router.patch('/save' , savePost)
+
+// router.delete('/:postId' , deleteUserPost)
+
+export default router
