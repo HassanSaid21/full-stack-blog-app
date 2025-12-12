@@ -2,8 +2,7 @@
 
 A modern, feature-rich blog application built with the MERN stack (MongoDB, Express, React, Node.js). This application provides a complete blogging platform with user authentication, rich text editing, image uploads, comments, and more.
 
-![Proto Blog App](https://img.shields.io/badge/version-1.0.0-blue.svg)
-![License](https://img.shields.io/badge/license-ISC-green.svg)
+
 
 ## 🚀 Features
 
