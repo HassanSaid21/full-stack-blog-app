@@ -1,18 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "./Image";
 import { Link } from "react-router-dom";
-import { SignedIn, SignedOut, useAuth, UserButton } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
 function Navbar() {
-
-  // const payload = useAuth()
-  // useEffect(() => {
-    
-  //   console.log(payload , )
-  //   payload.getToken().then(token=>console.log(token))
-      
-    
-  // },[] );
   const [open, setOpen] = useState(false);
   function handleOpen() {
     setOpen((open) => !open);
