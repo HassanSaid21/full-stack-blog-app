@@ -120,7 +120,7 @@ VITE_IK_PUBLIC_KEY=your_imagekit_public_key
 #### Start Backend Server
 ```bash
 cd backend
-npm start
+node index.js
 ```
 The backend server will run on `http://localhost:3000`
 
