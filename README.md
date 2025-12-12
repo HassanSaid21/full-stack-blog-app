@@ -29,8 +29,8 @@ A modern, feature-rich blog application built with the MERN stack (MongoDB, Expr
 - **React Router DOM** - Client-side routing
 - **React Query** (@tanstack/react-query) - Data fetching and state management
 - **Clerk** - Authentication and user management
-- **React Quill** - Rich text editor
-- **ImageKit React** - Image CDN and optimization
+- **React Quill New** - Rich text editor
+- **ImageKit IO React** - Image CDN and optimization
 - **Axios** - HTTP client
 - **DOMPurify** - XSS protection
 - **Prism.js** - Syntax highlighting
@@ -224,7 +224,7 @@ ImageKit integration provides:
 - Secure upload signatures
 
 ### Rich Text Editor
-React Quill editor with:
+React Quill New editor with:
 - WYSIWYG editing experience
 - Markdown support
 - Code syntax highlighting
