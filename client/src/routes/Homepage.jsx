@@ -17,11 +17,10 @@ function Homepage() {
         {/* Titles */}
         <div>
           <h1 className="text-gray-800 font-bold text-2xl md:5xl lg:text-6xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Share Your Stories, Connect With The World
           </h1>
           <p className="mt-8 text-md md:text-xl">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam
-            nostrum esse harum corporis.
+            Discover inspiring articles, share your experiences, and join a community of passionate writers and readers.
           </p>
         </div>
         {/* Animated Button */}
@@ -30,7 +29,6 @@ function Homepage() {
             viewBox="0 0 200 200"
             width="200"
             height="200"
-            // className="text-lg tracking-widest animate-spin animatedButton"
             className="text-lg tracking-widest animate-spin animatedButton"
           >
             <path

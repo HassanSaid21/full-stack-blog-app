@@ -16,13 +16,11 @@ function Write() {
   const [progress, setProgress] = useState(0);
   const [img, setImg] = useState();
   const [video, setVideo] = useState();
-  console.log(cover)
+
   useEffect(() => {
-    
-    if(img) setValue(prev=>prev+`<P><img src="${img.url}"/></P>`)
-    if(video) setValue(prev=> prev+ `<p><iframe class='ql-video' src="${video.url}"></iframe></p>`) 
-    
-  }, [img , video]);
+    if (img) setValue(prev => prev + `<p><img src="${img.url}"/></p>`);
+    if (video) setValue(prev => prev + `<p><iframe class='ql-video' src="${video.url}"></iframe></p>`);
+  }, [img, video]);
 
   const mutation = useMutation({
     mutationFn: async (newPost) => {
@@ -45,12 +43,11 @@ function Write() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = {
-      img:cover.filePath||'' ,
+      img: cover.filePath || '',
       content: value,
       title: formData.get("title"),
       desc: formData.get("desc"),
       category: formData.get("category"),
-      // cover,
     };
     mutation.mutate(data);
   }

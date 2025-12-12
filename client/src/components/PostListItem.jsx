@@ -16,18 +16,18 @@ function PostListItem({post}) {
         <Link to={`/${post.slug}`} className="font-semibold text-4xl">
           {post.title}
         </Link>
-        <div className="flex gap-2 items-center  text-gray-400 text-sm">
-          <span> Written by</span>
-          <Link to={`posts/?author=${post.user.username}`} className="text-blue-800">{post?.user?.username }</Link>
+        <div className="flex gap-2 items-center text-gray-400 text-sm">
+          <span>Written by</span>
+          <Link to={`posts/?author=${post.user.username}`} className="text-blue-800">{post?.user?.username}</Link>
           <span>on</span>
           <Link to={`posts/?cat=${post.category}`} className="text-blue-800">{post.category}</Link>
           <span>{format(post.createdAt)}</span>
         </div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum cum
-          eligendi sit sunt earum maxime deserunt, doloribus consequatur
-          expedita, dolorem ex .
-        </p>
+        {post.desc && (
+          <p className="text-gray-600">
+            {post.desc}
+          </p>
+        )}
         <Link to={`/${post.slug}`} className="underline text-blue-800 text-sm">
           Read more
         </Link>
