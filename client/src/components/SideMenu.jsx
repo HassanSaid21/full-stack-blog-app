@@ -27,16 +27,17 @@ function SideMenu() {
   useEffect(() => {
     // When category changes, clear the sort selection
     setSort("");
-    searchParams.delete("sort");
-    setSearchParams(searchParams);
-  }, [cat]);
+    const newParams = new URLSearchParams(searchParams);
+    newParams.delete("sort");
+    setSearchParams(newParams);
+  }, [cat, searchParams, setSearchParams]);
 
   function handleSortChange(e) {
-    if (searchParams.get('sort') !== e.target.value)
-      {
-    const newSort = e.target.value;
-    setSort(newSort);
-    setSearchParams({...Object.fromEntries(searchParams),sort:newSort});}
+    if (searchParams.get('sort') !== e.target.value) {
+      const newSort = e.target.value;
+      setSort(newSort);
+      setSearchParams({ ...Object.fromEntries(searchParams), sort: newSort });
+    }
   }
 
   return (

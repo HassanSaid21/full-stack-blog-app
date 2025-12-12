@@ -8,19 +8,18 @@ import cors from 'cors'
 import { clerkMiddleware } from "@clerk/express";
 const app = express();
 
-// allow cross-origin requests for imageKit
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", 
-    "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-app.use(cors(process.env.CLIENT_URL))
-app.use(clerkMiddleware());
-app.use("/webhooks", WebhookRouter);
+// CORS configuration
+app.use(cors({
+  origin: process.env.CLIENT_URL || "*",
+  credentials: true
+}));
 
-// Parse JSON payloads
+// Parse JSON payloads (must be before routes)
 app.use(express.json());
+
+// Clerk middleware and webhook route (webhooks before clerkMiddleware)
+app.use("/webhooks", WebhookRouter);
+app.use(clerkMiddleware());
 
 
 // Routes
@@ -30,10 +29,11 @@ app.use("/comments", commentRouter);
 
 // Global Error Handler
 app.use((err, req, res, next) => {
-  res.status(err.status || 500).json({
+  const statusCode = err.status || 500;
+  res.status(statusCode).json({
     message: err.message || "Something went wrong",
-    status: err.status,
-    stack: err.stack,
+    status: statusCode,
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
   });
 });
 
